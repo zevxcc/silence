@@ -1,3 +1,1 @@
-# silence
 
-Copyright @TM SILENCE 
