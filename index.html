@@ -158,7 +158,34 @@
             text-transform: uppercase;
             animation: fadeIn 2s ease-in-out;
         }
+.btn {
+    position: relative;
+    padding: 16px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 140px;
+    overflow: hidden;
+}
 
+.btn-purchase {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+}
+
+.btn-purchase:hover {
+    background: linear-gradient(135deg, #ff5555, #dd1111);
+    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+    transform: translateY(-2px);
+}
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -214,6 +241,8 @@
             <span class="custom-letter letter-s">S</span><span class="custom-letter letter-i">I</span><span class="custom-letter letter-l">L</span><span class="custom-letter letter-e">E</span><span class="custom-letter letter-n">N</span><span class="custom-letter letter-ce">CE</span>
         </h1>
         <p class="subtitle">UNDETECTED · EASY TO USE · CHEAP!</p>
+        <!-- Purchase Button -->
+<a href="#" class="btn btn-purchase" onclick="handlePurchase()">Purchase</a>
     </div>
 
     <script>
