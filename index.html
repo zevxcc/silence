@@ -21,6 +21,50 @@
             overflow: hidden;
         }
 
+        .main-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .landing-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .landing-page.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        .login-page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(1.2);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+
+        .login-page.visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
         .logo-container {
             text-align: center;
             position: relative;
@@ -108,17 +152,6 @@
             animation: gradientShift 3s ease-in-out infinite reverse;
         }
 
-        @keyframes dotPulse {
-            0%, 100% { 
-                transform: translateX(-50%) scale(1);
-                opacity: 1;
-            }
-            50% { 
-                transform: translateX(-50%) scale(1.3);
-                opacity: 0.8;
-            }
-        }
-
         .glow-effect {
             position: absolute;
             top: 50%;
@@ -158,37 +191,189 @@
             text-transform: uppercase;
             animation: fadeIn 2s ease-in-out;
         }
-.btn {
-    position: relative;
-    padding: 16px 32px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    min-width: 140px;
-    overflow: hidden;
-}
 
-.btn-purchase {
-    background: linear-gradient(135deg, #ff4444, #cc0000);
-    color: white;
-    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
-}
+        .btn {
+            position: relative;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 160px;
+            overflow: hidden;
+            margin-top: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+        }
 
-.btn-purchase:hover {
-    background: linear-gradient(135deg, #ff5555, #dd1111);
-    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
-    transform: translateY(-2px);
-}
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+            transform: translateY(0);
+        }
+
+        .btn-login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #7c8bea 0%, #8a5db2 100%);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-login:hover::before {
+            left: 100%;
+        }
+
+        .btn-login:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Login Form Styles */
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff9ff3, #54a0ff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .login-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #7c8bea 0%, #8a5db2 100%);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 20;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.3);
+                opacity: 0.8;
+            }
         }
 
         @keyframes pulse {
@@ -229,20 +414,65 @@
                 font-size: 1rem;
                 margin-top: 1.5rem;
             }
+            .login-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            .back-btn {
+                top: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="logo-container">
-        <div class="glow-effect"></div>
-        <h1 class="logo-text">
-            <span class="custom-letter letter-s">S</span><span class="custom-letter letter-i">I</span><span class="custom-letter letter-l">L</span><span class="custom-letter letter-e">E</span><span class="custom-letter letter-n">N</span><span class="custom-letter letter-ce">CE</span>
-        </h1>
-        <p class="subtitle">UNDETECTED · EASY TO USE · CHEAP!</p>
-        <!-- Purchase Button -->
-<a href="#" class="btn btn-purchase" onclick="handlePurchase()">Purchase</a>
+    <div class="main-container">
+        <div class="particles" id="particles"></div>
+        
+        <!-- Landing Page -->
+        <div class="landing-page" id="landingPage">
+            <div class="logo-container">
+                <div class="glow-effect"></div>
+                <h1 class="logo-text">
+                    <span class="custom-letter letter-s">S</span><span class="custom-letter letter-i">I</span><span class="custom-letter letter-l">L</span><span class="custom-letter letter-e">E</span><span class="custom-letter letter-n">N</span><span class="custom-letter letter-ce">CE</span>
+                </h1>
+                <p class="subtitle">UNDETECTED · EASY TO USE · CHEAP!</p>
+                <button class="btn btn-login" onclick="showLogin()">
+                    Login
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div class="login-page" id="loginPage">
+            <button class="back-btn" onclick="showLanding()">
+                ←
+            </button>
+            <div class="login-container">
+                <h2 class="login-title">Welcome Back</h2>
+                <p class="login-subtitle">Enter your license key to continue</p>
+                
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="licenseKey">License Key</label>
+                        <input 
+                            type="text" 
+                            id="licenseKey" 
+                            class="form-input" 
+                            placeholder="XXXX-XXXX-XXXX-XXXX"
+                            maxlength="19"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        Authenticate
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -291,6 +521,54 @@
                 this.style.filter = 'none';
             });
         });
+
+        // Page transition functions
+        function showLogin() {
+            const landingPage = document.getElementById('landingPage');
+            const loginPage = document.getElementById('loginPage');
+            
+            landingPage.classList.add('hidden');
+            setTimeout(() => {
+                loginPage.classList.add('visible');
+            }, 300);
+        }
+
+        function showLanding() {
+            const landingPage = document.getElementById('landingPage');
+            const loginPage = document.getElementById('loginPage');
+            
+            loginPage.classList.remove('visible');
+            setTimeout(() => {
+                landingPage.classList.remove('hidden');
+            }, 300);
+        }
+
+        // Format license key input
+        document.getElementById('licenseKey').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+            let formattedValue = '';
+            
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
+            }
+            
+            e.target.value = formattedValue;
+        });
+
+        // Handle login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            const licenseKey = document.getElementById('licenseKey').value;
+            
+            // This is where you'll implement your license key validation
+            console.log('License key submitted:', licenseKey);
+            
+            // For now, just show an alert - replace this with your actual authentication logic
+            alert('Login system ready for implementation!\nLicense Key: ' + licenseKey);
+        }
     </script>
 </body>
 </html>
